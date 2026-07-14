@@ -14,7 +14,8 @@ engine = create_async_engine(
     future=True,
     connect_args={
         "command_timeout": 30, # Terminate slow queries after 30s
-        "server_settings": {"jit": "off"} # Disable JIT for general OLTP workloads
+        "server_settings": {"jit": "off"}, # Disable JIT for general OLTP workloads
+        "ssl": True # Explicitly enable SSL for cloud databases (Neon)
     }
 )
 

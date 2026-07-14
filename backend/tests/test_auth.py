@@ -8,10 +8,12 @@ def test_read_root():
     assert response.status_code == 200
     assert response.json()["status"] == "online"
 
-def test_register_mock():
-    response = client.post(
-        "/api/v1/auth/register",
-        json={"email": "test@stadium.local", "password": "securepassword"}
+def test_check_username():
+    response = client.get(
+        "/api/v1/auth/check-username",
+        params={"username": "available_test_user_123"}
     )
     assert response.status_code == 200
-    assert response.json()["email"] == "test@stadium.local"
+    assert response.json()["username"] == "available_test_user_123"
+    assert "available" in response.json()
+

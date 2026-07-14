@@ -5,7 +5,11 @@ celery_app = Celery(
     "stadium_os_worker",
     broker=settings.CELERY_BROKER_URL,
     backend=settings.CELERY_RESULT_BACKEND,
-    include=["backend.app.tasks.integration_tasks", "backend.app.tasks.realtime_tasks"]
+    include=[
+        "backend.app.tasks.integration_tasks",
+        "backend.app.tasks.realtime_tasks",
+        "backend.app.tasks.tasks"
+    ]
 )
 
 celery_app.conf.update(

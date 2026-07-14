@@ -25,6 +25,23 @@ async def lifespan(app: FastAPI):
     logger.info("🚀 Starting FIFA World Cup 2026 Smart Stadium Operating System API")
     logger.info("==================================================================")
     
+    from backend.app.database.database import check_db_health
+    from backend.app.core.redis_client import check_redis_health
+    
+    db_ok = await check_db_health()
+    if db_ok:
+        logger.info("✅ Database connection verified successfully.")
+    else:
+        logger.critical("💥 CRITICAL: Database health check failed. Shutting down application startup.")
+        raise RuntimeError("Database health check failed during lifespan startup.")
+        
+    redis_ok = await check_redis_health()
+    if redis_ok:
+        logger.info("✅ Redis connection verified successfully.")
+    else:
+        logger.critical("💥 CRITICAL: Redis health check failed. Shutting down application startup.")
+        raise RuntimeError("Redis health check failed during lifespan startup.")
+        
     yield
     
     # ── Shutdown Tasks ──

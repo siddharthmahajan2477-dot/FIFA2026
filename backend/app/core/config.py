@@ -33,7 +33,7 @@ class Settings(BaseSettings):
     
     # Middlewares Configurations
     CORS_ORIGINS: Any = ["*"]
-    ALLOWED_HOSTS: Any = ["localhost", "127.0.0.1"]
+    ALLOWED_HOSTS: Any = ["localhost", "127.0.0.1", "testserver"]
     
     # External APIs (Placeholders)
     GOOGLE_GENAI_API_KEY: Optional[str] = None
@@ -52,11 +52,41 @@ class Settings(BaseSettings):
     FIREBASE_CLIENT_EMAIL: Optional[str] = None
     FIREBASE_PRIVATE_KEY: Optional[str] = None
 
-    @field_validator("ALLOWED_HOSTS", "CORS_ORIGINS", mode="before")
+    @field_validator("ALLOWED_HOSTS", mode="before")
     @classmethod
-    def parse_comma_separated_list(cls, v: Any) -> List[str]:
+    def parse_allowed_hosts(cls, v: Any) -> List[str]:
+        if isinstance(v, str):
+            hosts = [x.strip() for x in v.split(",") if x.strip()]
+        elif isinstance(v, list):
+            hosts = v
+        else:
+            hosts = []
+        if "testserver" not in hosts:
+            hosts.append("testserver")
+        return hosts
+
+    @field_validator("CORS_ORIGINS", mode="before")
+    @classmethod
+    def parse_cors_origins(cls, v: Any) -> List[str]:
+        allowed_origins = os.getenv("ALLOWED_ORIGINS")
+        if allowed_origins:
+            return [x.strip() for x in allowed_origins.split(",") if x.strip()]
         if isinstance(v, str):
             return [x.strip() for x in v.split(",") if x.strip()]
+        return v
+
+    @field_validator("DATABASE_URL", "POSTGRES_DB_URL", mode="before")
+    @classmethod
+    def clean_db_url(cls, v: Any) -> str:
+        if isinstance(v, str) and "?" in v:
+            base_url, query = v.split("?", 1)
+            from urllib.parse import parse_qsl, urlencode
+            params = dict(parse_qsl(query))
+            params.pop("sslmode", None)
+            params.pop("channel_binding", None)
+            if params:
+                return f"{base_url}?{urlencode(params)}"
+            return base_url
         return v
 
     model_config = SettingsConfigDict(

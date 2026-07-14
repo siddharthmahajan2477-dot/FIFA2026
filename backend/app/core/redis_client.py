@@ -1,4 +1,4 @@
-from typing import AsyncGenerator
+from typing import AsyncGenerator, Optional
 import redis.asyncio as aioredis
 from backend.app.core.config import settings
 from backend.app.core.logging import logger

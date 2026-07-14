@@ -1,10 +1,9 @@
 import json
 from typing import Any, Optional
-import redis.asyncio as redis
-from backend.app.core.config import settings
+from backend.app.core.redis_client import get_redis_client
 
-# Global redis client pool
-redis_client = redis.from_url(settings.REDIS_URL, decode_responses=True)
+# Global redis client pool (shared)
+redis_client = get_redis_client()
 
 async def get_cache(key: str) -> Optional[Any]:
     """Retrieve an item from Redis and deserialize it."""
