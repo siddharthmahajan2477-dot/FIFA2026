@@ -4,7 +4,7 @@ from backend.app.core.redis_client import check_redis_health
 from backend.app.core.logging import logger
 from backend.app.core.config import settings
 import httpx
-import google.generativeai as genai
+from google import genai
 import firebase_admin
 from firebase_admin import App as FirebaseApp
 
@@ -14,9 +14,8 @@ async def check_gemini_health() -> bool:
     try:
         if not settings.GOOGLE_GENAI_API_KEY:
             return False
-        # Lightweight check: Just seeing if we can configure it and the API key is present
-        genai.configure(api_key=settings.GOOGLE_GENAI_API_KEY)
-        return True
+        client = genai.Client(api_key=settings.GOOGLE_GENAI_API_KEY)
+        return client is not None
     except Exception as e:
         logger.error(f"Gemini health check failed: {e}")
         return False

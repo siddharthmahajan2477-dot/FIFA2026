@@ -66,31 +66,29 @@ class GoogleGenAIProvider(AIModelProvider):
         if not self._api_key:
             return
         try:
-            import google.generativeai as genai  # noqa: PLC0415
-
-            genai.configure(api_key=self._api_key)
-            self._client = genai.GenerativeModel(
-                model_name=self.MODEL_NAME,
-                safety_settings={
-                    "HARM_CATEGORY_HARASSMENT": "BLOCK_MEDIUM_AND_ABOVE",
-                    "HARM_CATEGORY_HATE_SPEECH": "BLOCK_MEDIUM_AND_ABOVE",
-                    "HARM_CATEGORY_SEXUALLY_EXPLICIT": "BLOCK_MEDIUM_AND_ABOVE",
-                    "HARM_CATEGORY_DANGEROUS_CONTENT": "BLOCK_MEDIUM_AND_ABOVE",
-                },
-            )
+            from google import genai  # noqa: PLC0415
+            self._client = genai.Client(api_key=self._api_key)
             logger.info("GoogleGenAIProvider initialised with model: %s", self.MODEL_NAME)
         except ImportError:
             logger.error(
-                "google-generativeai package not installed. "
-                "Run: pip install google-generativeai"
+                "google-genai package not installed. "
+                "Run: pip install google-genai"
             )
 
     async def chat_completion(self, system_prompt: str, user_prompt: str) -> str:
         if not self._client:
             return "[GoogleGenAI unavailable — API key or package missing]"
         try:
-            full_prompt = f"{system_prompt}\n\n{user_prompt}"
-            response = self._client.generate_content(full_prompt)
+            from google.genai import types
+            config = types.GenerateContentConfig(
+                system_instruction=system_prompt,
+                temperature=0.7,
+            )
+            response = await self._client.aio.models.generate_content(
+                model=self.MODEL_NAME,
+                contents=user_prompt,
+                config=config
+            )
             return response.text
         except Exception as exc:
             logger.error("GoogleGenAI chat_completion error: %s", exc)
@@ -103,9 +101,17 @@ class GoogleGenAIProvider(AIModelProvider):
             yield "[GoogleGenAI streaming unavailable]"
             return
         try:
-            full_prompt = f"{system_prompt}\n\n{user_prompt}"
-            response = self._client.generate_content(full_prompt, stream=True)
-            for chunk in response:
+            from google.genai import types
+            config = types.GenerateContentConfig(
+                system_instruction=system_prompt,
+                temperature=0.7,
+            )
+            response = await self._client.aio.models.generate_content_stream(
+                model=self.MODEL_NAME,
+                contents=user_prompt,
+                config=config
+            )
+            async for chunk in response:
                 if chunk.text:
                     yield chunk.text
         except Exception as exc:
@@ -118,22 +124,23 @@ class GoogleGenAIProvider(AIModelProvider):
         if not self._client:
             return {"error": "GoogleGenAI unavailable"}
         try:
-            import google.generativeai as genai  # noqa: PLC0415
-
-            model = genai.GenerativeModel(
-                model_name=self.MODEL_NAME,
-                tools=tools,
+            from google.genai import types
+            config = types.GenerateContentConfig(
+                system_instruction=system_prompt,
+                temperature=0.7,
+                tools=tools
             )
-            full_prompt = f"{system_prompt}\n\n{user_prompt}"
-            response = model.generate_content(full_prompt)
-            # Extract first function call if present
-            for candidate in response.candidates:
-                for part in candidate.content.parts:
-                    if part.function_call:
-                        return {
-                            "name": part.function_call.name,
-                            "args": dict(part.function_call.args),
-                        }
+            response = await self._client.aio.models.generate_content(
+                model=self.MODEL_NAME,
+                contents=user_prompt,
+                config=config
+            )
+            if response.function_calls:
+                fn_call = response.function_calls[0]
+                return {
+                    "name": fn_call.name,
+                    "args": dict(fn_call.args),
+                }
             return {"text": response.text}
         except Exception as exc:
             logger.error("GoogleGenAI function_call error: %s", exc)

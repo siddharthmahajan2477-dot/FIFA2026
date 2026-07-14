@@ -2,7 +2,7 @@ import logging
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from backend.app.database.session import async_session_maker
-from backend.app.models.users.models import User
+from backend.app.models.auth.models import User
 
 logger = logging.getLogger(__name__)
 
