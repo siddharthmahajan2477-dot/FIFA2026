@@ -1,7 +1,7 @@
 import { UserProfile, UserPreferences } from '../types/user'
 import { auth } from '@/lib/firebase'
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'
+const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'
 
 export class UserService {
   static async getProfile(): Promise<UserProfile> {

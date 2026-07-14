@@ -10,6 +10,8 @@ from backend.app.api.v1.infrastructure.router import router as infrastructure_ro
 from backend.app.api.v1.notifications.router import router as notifications_router
 from backend.app.api.v1.ai.router import router as ai_router
 from backend.app.api.v1.health import router as health_router
+from backend.app.api.v1.commerce.router import router as commerce_router
+from backend.app.api.v1.navigation.router import router as navigation_router
 
 v1_router = APIRouter()
 
@@ -24,3 +26,5 @@ v1_router.include_router(infrastructure_router, prefix="/infrastructure", tags=[
 v1_router.include_router(notifications_router, prefix="/notifications", tags=["notifications"])
 v1_router.include_router(ai_router, prefix="/ai", tags=["ai"])
 v1_router.include_router(health_router, prefix="/health", tags=["health"])
+v1_router.include_router(commerce_router, prefix="/commerce", tags=["commerce"])
+v1_router.include_router(navigation_router, prefix="/navigation", tags=["navigation"])

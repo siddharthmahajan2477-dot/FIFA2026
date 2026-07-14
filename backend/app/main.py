@@ -31,6 +31,8 @@ async def lifespan(app: FastAPI):
     db_ok = await check_db_health()
     if db_ok:
         logger.info("✅ Database connection verified successfully.")
+        from backend.app.database.seed import seed_database
+        await seed_database()
     else:
         logger.critical("💥 CRITICAL: Database health check failed. Shutting down application startup.")
         raise RuntimeError("Database health check failed during lifespan startup.")

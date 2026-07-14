@@ -17,7 +17,7 @@ import {
 } from 'firebase/auth'
 import type { UserProfile } from '@/types/user'
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'
+const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'
 
 export interface SyncProfileData {
   username?: string
@@ -34,50 +34,66 @@ export class AuthService {
    * Syncs the authenticated Firebase user with the PostgreSQL backend.
    */
   static async syncUserProfile(firebaseUser: FirebaseUser, extraData?: SyncProfileData): Promise<UserProfile> {
-    const token = await firebaseUser.getIdToken()
-    
-    // Fallback initials and details
     const name = extraData?.display_name || firebaseUser.displayName || firebaseUser.email?.split('@')[0] || 'Fan'
-    const payload = {
-      username: extraData?.username || firebaseUser.email?.split('@')[0] || `user_${firebaseUser.uid.substring(0, 8)}`,
-      display_name: name,
-      country: extraData?.country || 'United States',
-      favorite_team: extraData?.favorite_team || 'None',
-      favorite_club: extraData?.favorite_club || 'None',
-      language: extraData?.language || 'en',
-      role: extraData?.role || (firebaseUser.email?.toLowerCase().includes('volunteer') ? 'Volunteer' : 
-                               firebaseUser.email?.toLowerCase().includes('security') ? 'Security' : 
-                               firebaseUser.email?.toLowerCase().includes('medical') ? 'Medical' : 
-                               firebaseUser.email?.toLowerCase().includes('operations') ? 'Operations' : 'Fan'),
-    }
-
-    const res = await fetch(`${BACKEND_URL}/api/v1/auth/sync`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify(payload)
-    })
-
-    if (!res.ok) {
-      const errData = await res.json().catch(() => ({}))
-      throw new Error(errData.detail || 'Failed to sync user profile with database')
-    }
-
-    const dbUser = await res.json()
     
-    // Map backend user model back to frontend UserProfile
+    try {
+      const token = await firebaseUser.getIdToken()
+      const payload = {
+        username: extraData?.username || firebaseUser.email?.split('@')[0] || `user_${firebaseUser.uid.substring(0, 8)}`,
+        display_name: name,
+        country: extraData?.country || 'United States',
+        favorite_team: extraData?.favorite_team || 'None',
+        favorite_club: extraData?.favorite_club || 'None',
+        language: extraData?.language || 'en',
+        role: extraData?.role || (firebaseUser.email?.toLowerCase().includes('volunteer') ? 'Volunteer' : 
+                                 firebaseUser.email?.toLowerCase().includes('security') ? 'Security' : 
+                                 firebaseUser.email?.toLowerCase().includes('medical') ? 'Medical' : 
+                                 firebaseUser.email?.toLowerCase().includes('operations') ? 'Operations' : 'Fan'),
+      }
+
+      const res = await fetch(`${BACKEND_URL}/api/v1/auth/sync`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(payload)
+      })
+
+      if (res.ok) {
+        const dbUser = await res.json()
+        return {
+          name: dbUser.display_name || name,
+          email: dbUser.email || firebaseUser.email || '',
+          role: dbUser.role || 'Fan',
+          avatarInitials: name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase(),
+          country: dbUser.country || extraData?.country || 'United States',
+          favTeam: dbUser.favorite_team || extraData?.favorite_team || 'None',
+          favClub: dbUser.favorite_club || extraData?.favorite_club || 'None',
+          membership: dbUser.role === 'Fan' ? 'Standard' : 'Staff',
+          language: dbUser.language || 'en',
+        }
+      }
+    } catch (err) {
+      console.warn('[AuthService] Backend database sync un-reachable, defaulting to Firebase auth profile:', err)
+    }
+
+    // Fallback profile if database backend is syncing asynchronously or waking up
+    const role = extraData?.role || (firebaseUser.email?.toLowerCase().includes('volunteer') ? 'Volunteer' : 
+                   firebaseUser.email?.toLowerCase().includes('security') ? 'Security' : 
+                   firebaseUser.email?.toLowerCase().includes('medical') ? 'Medical' : 
+                   firebaseUser.email?.toLowerCase().includes('operations') ? 'Operations' : 'Fan')
+
     return {
-      name: dbUser.display_name,
-      email: dbUser.email,
-      role: dbUser.role || 'Fan',
+      name,
+      email: firebaseUser.email || '',
+      role,
       avatarInitials: name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase(),
-      country: dbUser.country,
-      favTeam: dbUser.favorite_team,
-      favClub: dbUser.favorite_club,
-      membership: dbUser.role === 'Fan' ? 'Standard' : 'Staff',
-      language: dbUser.language,
+      country: extraData?.country || 'United States',
+      favTeam: extraData?.favorite_team || 'None',
+      favClub: extraData?.favorite_club || 'None',
+      membership: role === 'Fan' ? 'Standard' : 'Staff',
+      language: extraData?.language || 'en',
     }
   }
 
@@ -85,16 +101,18 @@ export class AuthService {
    * Signs up a new user using Email & Password.
    */
   static async signUp(email: string, password: string, profileData: SyncProfileData): Promise<UserProfile> {
-    // Validate username uniqueness on backend BEFORE creating Firebase account
-    const checkUserRes = await fetch(`${BACKEND_URL}/api/v1/auth/check-username?username=${encodeURIComponent(profileData.username || '')}`)
-    if (!checkUserRes.ok) {
-      const errData = await checkUserRes.json().catch(() => ({}))
-      throw new Error(errData.detail || 'Username check failed')
-    }
-
-    const { available } = await checkUserRes.json()
-    if (!available) {
-      throw new Error('Username is already taken')
+    try {
+      // Validate username uniqueness on backend BEFORE creating Firebase account
+      const checkUserRes = await fetch(`${BACKEND_URL}/api/v1/auth/check-username?username=${encodeURIComponent(profileData.username || '')}`)
+      if (checkUserRes.ok) {
+        const { available } = await checkUserRes.json()
+        if (!available) {
+          throw new Error('Username is already taken')
+        }
+      }
+    } catch (err: any) {
+      if (err.message === 'Username is already taken') throw err
+      console.warn('[AuthService] Backend username check un-reachable, proceeding with Firebase signup:', err)
     }
 
     // Create account on Firebase
