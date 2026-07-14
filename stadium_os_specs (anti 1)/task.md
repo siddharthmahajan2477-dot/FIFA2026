@@ -1,0 +1,22 @@
+# Development Task Checklist: Stadium OS
+
+- `[x]` Step 1: Initialize Project Foundation
+  - `[x]` Create `index.html` with basic responsive application shell structure
+  - `[x]` Create `styles.css` with Pitch-Obsidian CSS variables, typography, and standard layout regions
+  - `[x]` Create `app.js` with base state management, route switching, and sidebar configuration
+- `[x]` Step 2: Build the Navigation & Role Swapper
+  - `[x]` Add the top-bar role selector (Fan, Organizer, Volunteer, Security, Medical, Compliance, IT Operator)
+  - `[x]` Implement active link highlights and dynamic sidebar link rendering per selected role
+- `[x]` Step 3: Implement Dashboard Viewports & Layout Templates
+  - `[x]` Build Center view template switcher
+  - `[x]` Build the Operations Command Center view with live map overlays and telemetry metrics
+  - `[x]` Build the Fan PWA viewport with ticketing, concessions commerce ordering, and transit card
+  - `[x]` Build the Security/Medical dispatches tracker with active incident timelines
+  - `[x]` Build the Admin/Observability console with system topology nodes status
+- `[x]` Step 4: Write Real-Time Telemetry Simulation & AI Copilot Workspace
+  - `[x]` Code the simulated event telemetry stream (gate flow scans, parking lot vacancy, utility metrics)
+  - `[x]` Build the interactive right-side AI Copilot drawer with speech listening and RAG mock responses
+- `[x]` Step 5: Verification & Walkthrough
+  - `[x]` Run manual audit for responsive layout adjustments
+  - `[x]` Verify WCAG contrast levels and keyboard tab focus rings
+  - `[x]` Document implementation in walkthrough report

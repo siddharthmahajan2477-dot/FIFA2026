@@ -1,0 +1,6 @@
+{
+  "summary": "Enterprise State Management Experience Specification (state_management_design.md) for Stadium OS. Standardizes loading skeletons, offline databases sync trees, error messages, and maps the desktop workspace configurations.",
+  "updatedAt": "2026-07-09T17:20:07.560737100Z",
+  "requestFeedback": true,
+  "userFacing": true
+}

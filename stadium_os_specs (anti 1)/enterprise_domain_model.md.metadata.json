@@ -1,0 +1,6 @@
+{
+  "summary": "Enterprise Data Architecture & Domain Model (enterprise_domain_model.md) for Stadium OS. Establishes DDD Bounded Contexts, Bounded Context boundaries, specifications for 30+ Core Business Entities, relationship mappings, data lifecycles, and governance frameworks.",
+  "updatedAt": "2026-07-07T19:30:41.126848800Z",
+  "requestFeedback": true,
+  "userFacing": true
+}

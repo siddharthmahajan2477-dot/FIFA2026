@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /.next/
+
+Sitemap: https://fifa-world-cup-2026.vercel.app/sitemap.xml

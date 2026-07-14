@@ -1,0 +1,6 @@
+{
+  "summary": "Enterprise Non-Functional Requirements & Quality Attributes Architecture (nfr_quality_architecture.md) for Stadium OS. Outlines system latency metrics, availability configurations, resilience tiers, offline degradation frameworks, accessibility targets, green sustainability rules, and quality verification tests.",
+  "updatedAt": "2026-07-07T20:23:12.739221800Z",
+  "requestFeedback": true,
+  "userFacing": true
+}

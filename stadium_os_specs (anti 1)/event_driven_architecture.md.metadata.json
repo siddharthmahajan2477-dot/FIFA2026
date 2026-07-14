@@ -1,0 +1,6 @@
+{
+  "summary": "Enterprise Event-Driven Architecture & Real-Time Communication Framework (event_driven_architecture.md) for Stadium OS. Outlines the event taxonomy, abstract JSON schema payloads, event lifecycle stages, real-time message routing patterns, error/failure mitigation plans, and observability metrics.",
+  "updatedAt": "2026-07-07T20:02:57.319028500Z",
+  "requestFeedback": true,
+  "userFacing": true
+}

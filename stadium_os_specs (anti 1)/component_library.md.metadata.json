@@ -1,0 +1,6 @@
+{
+  "summary": "Reusable Component Library specification (component_library.md) for Stadium OS. Organizes components under 10 categories, details design rules (purpose, states, variants, responsive reflow, accessibility, reusability) for each, and maps the atomic/composite component hierarchy.",
+  "updatedAt": "2026-07-07T16:56:53.258401800Z",
+  "requestFeedback": true,
+  "userFacing": true
+}

@@ -1,0 +1,1 @@
+from backend.app.integrations.firebase.service import FirebaseNotificationService

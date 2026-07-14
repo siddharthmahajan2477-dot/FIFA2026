@@ -1,0 +1,6 @@
+{
+  "summary": "Enterprise Integration & External Services Architecture (enterprise_integration_architecture.md) for Stadium OS. Establishes integration adapter layers, IoT gateway boundaries, data synchronization models, offline queue processing, and integration health governance rules.",
+  "updatedAt": "2026-07-07T20:21:41.423965700Z",
+  "requestFeedback": true,
+  "userFacing": true
+}
