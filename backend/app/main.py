@@ -9,7 +9,32 @@ from backend.app.core.logging import setup_logging, logger
 from backend.app.core.exceptions import register_exception_handlers
 from backend.app.middleware.request_id import RequestIdMiddleware
 from backend.app.middleware.logging import RequestLoggingMiddleware
-from backend.app.middleware.rate_limit import RateLimitMiddleware
+# Inline simple rate limiting middleware (100 req/min per IP)
+import time
+from fastapi import Request
+from fastapi.responses import JSONResponse
+from starlette.middleware.base import BaseHTTPMiddleware
+
+class RateLimitMiddleware(BaseHTTPMiddleware):
+    def __init__(self, app, max_requests: int = 100, period_seconds: int = 60):
+        super().__init__(app)
+        self.max_requests = max_requests
+        self.period = period_seconds
+        self.clients: dict[str, tuple[float, int]] = {}
+
+    async def dispatch(self, request: Request, call_next):
+        client_ip = request.client.host if request.client else "anonymous"
+        now = time.time()
+        window_start, count = self.clients.get(client_ip, (now, 0))
+        if now - window_start > self.period:
+            window_start = now
+            count = 0
+        count += 1
+        self.clients[client_ip] = (window_start, count)
+        if count > self.max_requests:
+            return JSONResponse(status_code=429, content={"detail": "Rate limit exceeded. Try again later."})
+        response = await call_next(request)
+        return response
 from backend.app.middleware.security_headers import SecurityHeadersMiddleware
 from backend.app.api.v1 import v1_router
 from backend.app.realtime.manager import room_manager

@@ -32,7 +32,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 10080  # 7 days
     
     # Middlewares Configurations
-    CORS_ORIGINS: Any = ["http://localhost:3000", "http://127.0.0.1:3000"]
+    CORS_ORIGINS: Any = ["https://footbalia.com", "http://localhost:3000", "http://127.0.0.1:3000"]
     ALLOWED_HOSTS: Any = ["localhost", "127.0.0.1", "testserver"]
     
     # External APIs (Placeholders)

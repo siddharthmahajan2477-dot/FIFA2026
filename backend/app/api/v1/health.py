@@ -3,44 +3,19 @@ from backend.app.database.database import check_db_health
 from backend.app.core.redis_client import check_redis_health
 from backend.app.core.logging import logger
 from backend.app.core.config import settings
-import httpx
-from google import genai
-import firebase_admin
-from firebase_admin import App as FirebaseApp
+import json
+from backend.app.services.health_service import (
+    check_gemini_health,
+    check_firebase_health,
+    check_external_api_health,
+    get_full_health_components,
+)
 
 router = APIRouter()
 
-async def check_gemini_health() -> bool:
-    try:
-        if not settings.GOOGLE_GENAI_API_KEY:
-            return False
-        client = genai.Client(api_key=settings.GOOGLE_GENAI_API_KEY)
-        return client is not None
-    except Exception as e:
-        logger.error(f"Gemini health check failed: {e}")
-        return False
 
-async def check_firebase_health() -> bool:
-    try:
-        # Check if the default app is initialized
-        app: FirebaseApp = firebase_admin.get_app()
-        return app is not None
-    except ValueError:
-        # App is not initialized
-        return False
-    except Exception as e:
-        logger.error(f"Firebase health check failed: {e}")
-        return False
 
-async def check_external_api_health() -> bool:
-    try:
-        # Ping the football API to ensure external internet egress works
-        async with httpx.AsyncClient(timeout=3.0) as client:
-            res = await client.get("https://v3.football.api-sports.io/status", headers={"x-apisports-key": settings.FOOTBALL_API_KEY})
-            return res.status_code == 200
-    except Exception as e:
-        logger.error(f"External API health check failed: {e}")
-        return False
+
 
 @router.get("/health")
 def get_health():

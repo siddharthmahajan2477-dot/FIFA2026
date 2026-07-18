@@ -19,7 +19,7 @@ def create_response_envelope(success: bool, message: str, data: Any = None) -> d
         "success": success,
         "message": message,
         "data": data,
-        "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
+        "timestamp": datetime.utcnow().isoformat() + "Z",
         "request_id": request_id_var.get()
     }
 
