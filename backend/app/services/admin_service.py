@@ -7,7 +7,7 @@ from backend.app.models.auth.models import User, Role, UserRole
 from backend.app.models.users.models import UserProfile
 from backend.app.services.audit import log_audit_event
 
-async def list_users(skip: int = 0, limit: int = 50, search: str | None = None, db: AsyncSession) -> List[Dict[str, Any]]:
+async def list_users(db: AsyncSession, skip: int = 0, limit: int = 50, search: str | None = None) -> List[Dict[str, Any]]:
     """Return list of users with optional search."""
     stmt = select(User)
     if search:
