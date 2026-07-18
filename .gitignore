@@ -31,3 +31,4 @@ Thumbs.db
 # Logs
 *.log
 logs/
+testsprite_tests\tmp\config.json

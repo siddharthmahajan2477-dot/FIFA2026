@@ -1,0 +1,23 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:3000",
+  "executionArgs": {
+    "projectName": "FootBallAI",
+    "projectPath": "C:\\Users\\Admin\\Desktop\\FootBallAI",
+    "testIds": [
+      "TC001",
+      "TC002",
+      "TC003",
+      "TC004",
+      "TC005"
+    ],
+    "additionalInstruction": "Run tests sequentially. Static Next.js export served on port 3000.",
+    "serverMode": "production",
+    "envs": {
+      "API_KEY": "sk-user-AVBet28DoKabrS-NDk7BkS4J-P9ou4QaPcttG4yQz9AqhyczJ4K2SCbE8ZtlAyw2z8jaXM3hSp1lGYSEOZ8gaL9UNKm4tMAFph_Iw4CAZ1-WbcyDk8wmLLXyeP3LCUqruJA"
+    }
+  },
+  "serverPort": 61813
+}

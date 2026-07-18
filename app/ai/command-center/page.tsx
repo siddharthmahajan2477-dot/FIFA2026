@@ -6,10 +6,15 @@ import { ChatBubble } from '@/components/ai/ChatBubble'
 import { AIService } from '../../../services/ai.service'
 
 export default function AICommandCenter() {
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useState<{
+    id: number
+    role: 'user' | 'assistant'
+    content: string
+    timestamp: string
+  }[]>([
     {
       id: 1,
-      role: 'assistant' as const,
+      role: 'assistant',
       content: 'Welcome to the AI Command Center. I can help you monitor operations, analyze data, and optimize stadium performance. What would you like to know?',
       timestamp: '10:30 AM',
     },

@@ -23,7 +23,7 @@ export function useNotifications() {
 
   const dismiss = async (id: string | number) => {
     try {
-      await NotificationService.markAsRead(id)
+      await NotificationService.markAsRead(id.toString())
       setNotifications((prev) => prev.filter((n) => n.id !== id))
     } catch (err) {
       console.error(err)

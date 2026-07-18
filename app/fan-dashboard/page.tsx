@@ -85,8 +85,8 @@ export default function FanDashboard() {
                 <MatchCard
                   homeTeam={liveMatch.homeTeam}
                   awayTeam={liveMatch.awayTeam}
-                  homeScore={liveMatch.homeScore}
-                  awayScore={liveMatch.awayScore}
+                  homeScore={liveMatch.homeScore ?? undefined}
+                  awayScore={liveMatch.awayScore ?? undefined}
                   isLive={true}
                   status="live"
                 />

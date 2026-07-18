@@ -10,7 +10,7 @@ interface EnergyCardProps {
   unit: string
   max?: number
   trend?: number
-  status?: 'normal' | 'warning' | 'critical'
+  status?: 'normal' | 'warning' | 'critical' | 'closed'
 }
 
 export function EnergyCard({ type, value, unit, max, trend, status }: EnergyCardProps) {
@@ -25,6 +25,7 @@ export function EnergyCard({ type, value, unit, max, trend, status }: EnergyCard
     normal: 'text-emerald-600 dark:text-emerald-400',
     warning: 'text-amber-600 dark:text-amber-400',
     critical: 'text-red-600 dark:text-red-400',
+    closed: 'text-slate-600 dark:text-slate-400',
   }[status || 'normal']
 
   const percentage = max ? (value / max) * 100 : 0

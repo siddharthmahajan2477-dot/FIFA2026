@@ -8,7 +8,7 @@ export interface AIProvider {
 }
 
 export class AIService {
-  private static apiUrl: string = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+  private static apiUrl: string = process.env.NEXT_PUBLIC_API_URL || 'https://fifa-smart-stadium-backend.onrender.com'
 
   static async generateText(prompt: string, agentType: string = 'default'): Promise<string> {
     try {

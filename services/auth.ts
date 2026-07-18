@@ -17,7 +17,7 @@ import {
 } from 'firebase/auth'
 import type { UserProfile } from '@/types/user'
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'
+const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_BACKEND_URL || 'https://fifa-smart-stadium-backend.onrender.com'
 
 export interface SyncProfileData {
   username?: string

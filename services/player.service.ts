@@ -1,5 +1,5 @@
 export class PlayerService {
-  private static apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+  private static apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://fifa-smart-stadium-backend.onrender.com';
 
   static async getPlayers() {
     try {

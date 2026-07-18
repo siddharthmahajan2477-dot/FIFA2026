@@ -1,0 +1,1236 @@
+[
+  {
+    "id": "TC001",
+    "title": "Open the platform overview and enter the fan dashboard",
+    "description": "This verifies that a visitor can understand the landing page and reach the fan dashboard from the main entry point.",
+    "category": "Home Navigation",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the entry point for the fan dashboard"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the fan dashboard is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify personalized fan content is shown"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC002",
+    "title": "Use the landing page to enter the infrastructure hub",
+    "description": "This verifies that a visitor can use the home page to navigate into the infrastructure module.",
+    "category": "Home Navigation",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the entry point for the infrastructure portal"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the infrastructure hub is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC003",
+    "title": "Open infrastructure hub and review system health",
+    "description": "This verifies that a user can open the infrastructure hub, see its monitoring overview, and reach a key sub-module from the hub.",
+    "category": "Infrastructure Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /infrastructure"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify infrastructure KPI widgets are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify system status information is displayed"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open the energy module"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the energy monitoring page is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC004",
+    "title": "Use the landing page to enter the operations hub",
+    "description": "This verifies that a visitor can use the home page to navigate into the operations module.",
+    "category": "Home Navigation",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the entry point for the operations portal"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the operations hub is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC005",
+    "title": "Sign in with valid email and password",
+    "description": "This verifies that a user can complete email and password sign in and reach the account area.",
+    "category": "User Authentication",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /auth"
+      },
+      {
+        "type": "action",
+        "description": "Switch to sign in mode"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify access to the account area is shown"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC006",
+    "title": "Preserve ticket browsing across common fan entry points",
+    "description": "This test verifies that a fan can reach the ticket area from the home module navigation and complete a basic ticket review journey.",
+    "category": "Tickets",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the fan module card"
+      },
+      {
+        "type": "action",
+        "description": "Continue to the tickets section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify ticket options are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify ticket-related details are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC007",
+    "title": "View loaded live match and ticket summaries on the fan dashboard",
+    "description": "This verifies that the fan dashboard loads its match and ticket content after the initial loading state.",
+    "category": "Fan Dashboard",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /fan-dashboard"
+      },
+      {
+        "type": "action",
+        "description": "Wait for content to load"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify live match cards are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify ticket summaries are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC008",
+    "title": "View ticket options and details",
+    "description": "This test verifies that a fan can open the ticket area, review ticket options, and inspect ticket details end to end.",
+    "category": "Tickets",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /tickets"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify ticket options are displayed"
+      },
+      {
+        "type": "action",
+        "description": "Click a ticket option"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify ticket details are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC009",
+    "title": "Create an account with email and password",
+    "description": "This verifies that a user can complete registration with email and password and see a confirmation of account creation.",
+    "category": "User Authentication",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /auth"
+      },
+      {
+        "type": "action",
+        "description": "Switch to registration mode"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with a new email address"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with a valid password"
+      },
+      {
+        "type": "action",
+        "description": "Submit the form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify account creation confirmation is visible"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC010",
+    "title": "Review live match statistics and event tracking",
+    "description": "Verifies that a user can open match center and review live statistics together with event tracking updates for the current match.",
+    "category": "Match Center",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /match-center"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify live match statistics are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify event tracking updates are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC011",
+    "title": "View AI insights and open a related AI module from the command center",
+    "description": "This verifies that a user can review AI recommendations on the command center dashboard and navigate to a related AI view.",
+    "category": "AI Command Center",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /ai/command-center"
+      },
+      {
+        "type": "action",
+        "description": "View AI insights and recommendations"
+      },
+      {
+        "type": "action",
+        "description": "Review dashboard widgets"
+      },
+      {
+        "type": "action",
+        "description": "Open a related AI module"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify AI insights are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a related AI module is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC012",
+    "title": "Open ticket management from the fan dashboard",
+    "description": "This verifies that a fan can continue from the dashboard into ticket management.",
+    "category": "Fan Dashboard",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /fan-dashboard"
+      },
+      {
+        "type": "action",
+        "description": "Wait for content to load"
+      },
+      {
+        "type": "action",
+        "description": "Click the ticket management entry point"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the ticket management page is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC013",
+    "title": "Find stadium facilities from the navigation map",
+    "description": "A fan can open stadium navigation, view the map, locate a facility, and see route guidance to continue inside the venue.",
+    "category": "Stadium Navigation",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /stadium-navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the stadium map is displayed"
+      },
+      {
+        "type": "action",
+        "description": "Locate a facility on the map"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify location guidance is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC014",
+    "title": "Open energy monitoring from the infrastructure hub",
+    "description": "This verifies that a user can move from the infrastructure hub into energy monitoring and see energy data.",
+    "category": "Infrastructure Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /infrastructure"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open the energy module"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify energy monitoring metrics are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify energy consumption information is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC015",
+    "title": "Explore the AI hub and reach the executive dashboard",
+    "description": "This verifies that a user can move from the AI hub to the executive dashboard for decision-making views.",
+    "category": "AI Intelligence Platform",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /ai"
+      },
+      {
+        "type": "action",
+        "description": "Click the executive dashboard entry point"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the executive dashboard is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC016",
+    "title": "Proceed through ticket purchase flow",
+    "description": "This test verifies that a fan can select a ticket option and continue into the purchase or reservation flow.",
+    "category": "Tickets",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /tickets"
+      },
+      {
+        "type": "action",
+        "description": "Select a ticket option"
+      },
+      {
+        "type": "action",
+        "description": "Proceed with the purchase or reservation flow"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the next step in the ticket flow is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC017",
+    "title": "Open the AI platform and reach the command center",
+    "description": "This test verifies that a user can enter the AI platform hub from the main AI landing page and arrive at the command center view.",
+    "category": "AI Platform Hub",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /ai"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open the AI command center"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the AI command center view is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC018",
+    "title": "Open the AI command center from the AI hub",
+    "description": "This verifies that a user can move from the AI hub into the command center dashboard.",
+    "category": "AI Intelligence Platform",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /ai"
+      },
+      {
+        "type": "action",
+        "description": "Click the command center entry point"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the AI command center is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC019",
+    "title": "Open parking management from the infrastructure hub",
+    "description": "This verifies that a user can move from the infrastructure hub into parking management and see parking capacity information.",
+    "category": "Infrastructure Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /infrastructure"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open the parking module"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify parking availability information is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify parking zone status is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC020",
+    "title": "Browse the food menu and check queue information",
+    "description": "A fan can open food and beverage, review available menu options, and see expected queue times before deciding where to order.",
+    "category": "Food and Beverage",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /food-beverage"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the food menu is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify queue time information is displayed"
+      },
+      {
+        "type": "action",
+        "description": "Browse available concessions"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify concession options are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC021",
+    "title": "Review infrastructure status and open the energy view",
+    "description": "This verifies that a user can inspect the infrastructure hub and continue into energy monitoring.",
+    "category": "Infrastructure Management Portal",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /infrastructure"
+      },
+      {
+        "type": "action",
+        "description": "Click the energy monitoring entry point"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the energy monitoring page is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC022",
+    "title": "Open a match from the live feed",
+    "description": "Verifies that a user can inspect a match from the live feed and view its score, minute, and status details.",
+    "category": "Match Center",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /match-center"
+      },
+      {
+        "type": "action",
+        "description": "Open a match from the live feed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify match score details are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify match minute and status are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC023",
+    "title": "Open food ordering from the fan dashboard",
+    "description": "This verifies that a fan can continue from the dashboard into food and beverage ordering.",
+    "category": "Fan Dashboard",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /fan-dashboard"
+      },
+      {
+        "type": "action",
+        "description": "Wait for content to load"
+      },
+      {
+        "type": "action",
+        "description": "Click the food and beverage entry point"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the food and beverage page is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC024",
+    "title": "Search for a venue area and review guidance",
+    "description": "A fan can search for a stadium area or facility and see the corresponding location guidance needed to continue to the destination.",
+    "category": "Stadium Navigation",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /stadium-navigation"
+      },
+      {
+        "type": "action",
+        "description": "Search for a venue area or facility"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the searched location is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify route guidance is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC025",
+    "title": "Compare AI insight cards and return to the AI hub",
+    "description": "This verifies that a user can inspect recommendation cards in the command center and navigate back to the AI hub.",
+    "category": "AI Command Center",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /ai/command-center"
+      },
+      {
+        "type": "action",
+        "description": "Inspect the current recommendations"
+      },
+      {
+        "type": "action",
+        "description": "Compare insight cards"
+      },
+      {
+        "type": "action",
+        "description": "Return to the AI hub"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify insight cards are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the AI hub is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC026",
+    "title": "Open the AI platform and reach the executive dashboard",
+    "description": "This test verifies that a user can use the AI landing page to open the executive dashboard for higher-level decision support.",
+    "category": "AI Platform Hub",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /ai"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open the executive dashboard"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the executive AI dashboard is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC027",
+    "title": "Review energy peak and current status",
+    "description": "This verifies that a user can inspect energy monitoring details and compare current status with peak values.",
+    "category": "Infrastructure Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /infrastructure/energy"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify energy status information is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify peak energy data is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC028",
+    "title": "Review insights in the AI command center",
+    "description": "This verifies that the AI command center displays insights and recommendations for operational use.",
+    "category": "AI Intelligence Platform",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /ai/command-center"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify AI insights are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify recommendations are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC029",
+    "title": "Review owned tickets and manage them",
+    "description": "This test verifies that a fan can open the tickets area, review owned or available tickets, and continue into ticket management.",
+    "category": "Tickets",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /tickets"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify owned or available tickets are displayed"
+      },
+      {
+        "type": "action",
+        "description": "Review ticket details"
+      },
+      {
+        "type": "action",
+        "description": "Continue with ticket management"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify ticket management controls are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC030",
+    "title": "Review infrastructure status and open the parking view",
+    "description": "This verifies that a user can inspect the infrastructure hub and continue into smart parking.",
+    "category": "Infrastructure Management Portal",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /infrastructure"
+      },
+      {
+        "type": "action",
+        "description": "Click the smart parking entry point"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the smart parking page is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC031",
+    "title": "Select a food or drink item to order",
+    "description": "A fan can choose an available food or drink item from the menu and continue toward ordering.",
+    "category": "Food and Beverage",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /food-beverage"
+      },
+      {
+        "type": "action",
+        "description": "Select a food or drink item"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the selected item is shown in the ordering flow"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify ordering can continue"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC032",
+    "title": "Open stadium navigation from the fan dashboard",
+    "description": "This verifies that a fan can continue from the dashboard into stadium wayfinding.",
+    "category": "Fan Dashboard",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /fan-dashboard"
+      },
+      {
+        "type": "action",
+        "description": "Wait for content to load"
+      },
+      {
+        "type": "action",
+        "description": "Click the stadium navigation entry point"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the stadium navigation page is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC033",
+    "title": "Review parking zones and availability",
+    "description": "This verifies that a user can inspect parking management details and compare availability across zones.",
+    "category": "Infrastructure Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /infrastructure/parking"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify parking zone information is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify parking availability is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC034",
+    "title": "Interact with AI dashboard widgets and review operational guidance",
+    "description": "This verifies that a user can interact with command center widgets and see updated operational guidance on the AI dashboard.",
+    "category": "AI Command Center",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /ai/command-center"
+      },
+      {
+        "type": "action",
+        "description": "Interact with dashboard widgets"
+      },
+      {
+        "type": "action",
+        "description": "Review the surfaced operational guidance"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify dashboard widgets are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify operational guidance is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC035",
+    "title": "Navigate into tickets from the fan dashboard",
+    "description": "This test verifies that a fan can start on the fan dashboard and continue to the tickets module from a summary view.",
+    "category": "Tickets",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /fan-dashboard"
+      },
+      {
+        "type": "action",
+        "description": "Continue to the tickets section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the ticket module is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify ticket-related summaries are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC036",
+    "title": "Review the AI platform overview",
+    "description": "This test verifies that a user can load the AI hub and see the available AI sections for navigation.",
+    "category": "AI Platform Hub",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /ai"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the AI platform overview is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the available AI sections are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC037",
+    "title": "Explore the operations hub and open security monitoring",
+    "description": "This verifies that a user can move from the operations hub into the security operations dashboard.",
+    "category": "Operations Hub",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /operations"
+      },
+      {
+        "type": "action",
+        "description": "Click the security operations entry point"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the security operations dashboard is displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC038",
+    "title": "Follow match state changes on the live view",
+    "description": "Verifies that the live match view presents an updating match state so the user can follow the game as it progresses.",
+    "category": "Match Center",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /match-center"
+      },
+      {
+        "type": "action",
+        "description": "Observe the live match view for a short period"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the live match state is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify event tracking remains visible"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC039",
+    "title": "Move from the AI hub into an operational intelligence view",
+    "description": "This test verifies that a user can start on the AI hub, choose an intelligence area, and continue into the selected AI experience.",
+    "category": "AI Platform Hub",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /ai"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open the AI command center"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the selected AI experience is displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC040",
+    "title": "Explore the operations hub and open sanitation monitoring",
+    "description": "This verifies that a user can move from the operations hub into the sanitation operations dashboard.",
+    "category": "Operations Hub",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /operations"
+      },
+      {
+        "type": "action",
+        "description": "Click the sanitation operations entry point"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the sanitation operations dashboard is displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC041",
+    "title": "Open the infrastructure settings panel and save updated preferences",
+    "description": "This verifies that a user can review infrastructure settings, change a preference, and save the updated configuration successfully.",
+    "category": "Infrastructure Settings",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /infrastructure/settings"
+      },
+      {
+        "type": "action",
+        "description": "Review the current settings panel"
+      },
+      {
+        "type": "action",
+        "description": "Adjust a configuration option"
+      },
+      {
+        "type": "action",
+        "description": "Save the changes"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the updated configuration is shown"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC042",
+    "title": "Update notification preferences",
+    "description": "Verifies that a user can change notification preferences on the fan profile page and save the updated settings.",
+    "category": "Fan Profile and Preferences",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /fan-profile"
+      },
+      {
+        "type": "action",
+        "description": "Review the current notification preferences"
+      },
+      {
+        "type": "action",
+        "description": "Change a notification preference"
+      },
+      {
+        "type": "action",
+        "description": "Save the updated settings"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the updated preferences are reflected on the page"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC043",
+    "title": "Update infrastructure preferences from the settings panel",
+    "description": "This verifies that a user can open the settings panel, update selected infrastructure preferences, and confirm the changes persist in the view.",
+    "category": "Infrastructure Settings",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /infrastructure/settings"
+      },
+      {
+        "type": "action",
+        "description": "Open the settings panel"
+      },
+      {
+        "type": "action",
+        "description": "Update selected infrastructure preferences"
+      },
+      {
+        "type": "action",
+        "description": "Confirm the updated configuration"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the updated configuration is shown"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC044",
+    "title": "Open the AI platform and choose an intelligence area",
+    "description": "This test verifies that a user can review the AI landing page and select one of the available intelligence areas.",
+    "category": "AI Platform Hub",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /ai"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open an AI sub-module"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an AI module page is displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC045",
+    "title": "View profile and account details",
+    "description": "Verifies that a user can open the fan profile page and review their personal account information, preferences, and badges.",
+    "category": "Fan Profile and Preferences",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /fan-profile"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify profile details are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify preferences and badges are displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC046",
+    "title": "Open infrastructure settings and audit pages",
+    "description": "This verifies that a user can reach infrastructure configuration and compliance views from the infrastructure hub.",
+    "category": "Infrastructure Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /infrastructure"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open the infrastructure settings page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify infrastructure settings are displayed"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open the infrastructure audit page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify compliance audit information is displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC047",
+    "title": "Open infrastructure settings from the infrastructure hub",
+    "description": "This verifies that a user can navigate from the infrastructure hub into settings management.",
+    "category": "Infrastructure Management Portal",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /infrastructure"
+      },
+      {
+        "type": "action",
+        "description": "Click the infrastructure settings entry point"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the infrastructure settings page is displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC048",
+    "title": "Review team statistics and standings",
+    "description": "Verifies that a user can open team analytics and review team statistics, standings, and performance metrics together.",
+    "category": "Team Analytics",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /team-analytics"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify team statistics are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify standings and performance metrics are displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC049",
+    "title": "Continue from the command center to the executive dashboard",
+    "description": "This test verifies that a user can move between AI sub-modules after starting in the command center.",
+    "category": "AI Platform Hub",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /ai"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open the AI command center"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open the executive dashboard"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the executive AI dashboard is displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC050",
+    "title": "Open infrastructure audit from the infrastructure hub",
+    "description": "This verifies that a user can navigate from the infrastructure hub into audit and compliance tracking.",
+    "category": "Infrastructure Management Portal",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /infrastructure"
+      },
+      {
+        "type": "action",
+        "description": "Click the infrastructure audit entry point"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the audit page is displayed"
+      }
+    ],
+    "priority": "Medium"
+  }
+]

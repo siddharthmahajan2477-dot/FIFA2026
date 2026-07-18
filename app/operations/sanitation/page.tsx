@@ -8,6 +8,7 @@ import {
 } from 'lucide-react'
 import { OperationsService } from '../../../services/operations.service'
 import { KPICard } from '@/components/ops/KPICard'
+import { AlertBanner } from '@/components/ops/AlertBanner'
 
 type StatusDot = 'green' | 'yellow' | 'red' | 'blue'
 

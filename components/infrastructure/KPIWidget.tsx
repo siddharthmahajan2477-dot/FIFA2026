@@ -8,7 +8,7 @@ interface KPIWidgetProps {
   value: number | string
   unit?: string
   change?: number
-  trend?: 'up' | 'down'
+  trend?: 'up' | 'down' | 'stable'
   icon?: React.ReactNode
   target?: number | string
 }
@@ -30,7 +30,9 @@ export function KPIWidget({ title, value, unit, change, trend, icon, target }: K
           </div>
           {change !== undefined && trend && (
             <div className="flex items-center gap-1">
-              {trend === 'up' ? (
+              {trend === 'stable' ? (
+                <span className="text-sm text-muted-foreground">{change}%</span>
+              ) : trend === 'up' ? (
                 <>
                   <TrendingUp className="h-4 w-4 text-emerald-600" />
                   <span className="text-sm text-emerald-600">+{change}%</span>

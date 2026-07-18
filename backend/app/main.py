@@ -25,6 +25,11 @@ async def lifespan(app: FastAPI):
     logger.info("🚀 Starting FIFA World Cup 2026 Smart Stadium Operating System API")
     logger.info("==================================================================")
     
+    if "*" in settings.CORS_ORIGINS or settings.CORS_ORIGINS == ["*"]:
+        logger.critical("💥 CRITICAL: CORS wildcard cannot be used with allow_credentials=True.")
+        raise RuntimeError("CORS wildcard not allowed with credentials.")
+
+    
     from backend.app.database.database import check_db_health
     from backend.app.core.redis_client import check_redis_health
     

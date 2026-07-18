@@ -36,13 +36,13 @@ export default function AuditPage() {
         {/* Filters */}
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
           <Input placeholder="Search by user or resource..." className="flex-1" />
-          <Select disabled>
-            <SelectTrigger className="w-full sm:w-48">
+          <Select>
+            <SelectTrigger disabled className="w-full sm:w-48">
               <SelectValue placeholder="Filter by action" />
             </SelectTrigger>
           </Select>
-          <Select disabled>
-            <SelectTrigger className="w-full sm:w-48">
+          <Select>
+            <SelectTrigger disabled className="w-full sm:w-48">
               <SelectValue placeholder="Filter by date" />
             </SelectTrigger>
           </Select>

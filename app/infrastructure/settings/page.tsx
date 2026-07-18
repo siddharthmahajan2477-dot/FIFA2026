@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { SettingsPanel } from '@/components/infrastructure/SettingsPanel'
+import { SettingsPanel, SettingOption } from '@/components/infrastructure/SettingsPanel'
 
-const appearanceSettings = [
+const appearanceSettings: SettingOption[] = [
   { id: 'theme', label: 'Theme', type: 'select', value: 'light', options: [
     { value: 'light', label: 'Light' },
     { value: 'dark', label: 'Dark' },
@@ -13,7 +13,7 @@ const appearanceSettings = [
   { id: 'reduced-motion', label: 'Reduced Motion', description: 'Minimize animations for accessibility', type: 'toggle', value: false },
 ]
 
-const notificationSettings = [
+const notificationSettings: SettingOption[] = [
   { id: 'email-alerts', label: 'Email Alerts', description: 'Receive alerts via email', type: 'toggle', value: true },
   { id: 'in-app-notifications', label: 'In-App Notifications', description: 'Browser notifications', type: 'toggle', value: true },
   { id: 'sms-critical', label: 'SMS for Critical Events', description: 'Get SMS on critical incidents', type: 'toggle', value: false },
@@ -24,7 +24,7 @@ const notificationSettings = [
   ]},
 ]
 
-const securitySettings = [
+const securitySettings: SettingOption[] = [
   { id: '2fa', label: 'Two-Factor Authentication', description: 'Add extra security layer', type: 'toggle', value: true },
   { id: 'session-timeout', label: 'Session Timeout', type: 'select', value: '30', options: [
     { value: '15', label: '15 minutes' },
@@ -35,7 +35,7 @@ const securitySettings = [
   { id: 'ip-lock', label: 'IP Whitelist', description: 'Restrict login to specific IPs', type: 'toggle', value: false },
 ]
 
-const systemSettings = [
+const systemSettings: SettingOption[] = [
   { id: 'timezone', label: 'Timezone', type: 'select', value: 'UTC', options: [
     { value: 'UTC', label: 'UTC' },
     { value: 'EST', label: 'Eastern' },

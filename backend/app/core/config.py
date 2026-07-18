@@ -15,15 +15,15 @@ class Settings(BaseSettings):
     PORT: int = 8000
     
     # Database (PostgreSQL) URL - fallback to development local pg server
-    DATABASE_URL: str = "postgresql+asyncpg://neondb_owner:npg_3trCS9nGFJio@ep-long-unit-azyes96p-pooler.c-3.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
-    POSTGRES_DB_URL: str = "postgresql+asyncpg://neondb_owner:npg_3trCS9nGFJio@ep-long-unit-azyes96p-pooler.c-3.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+    DATABASE_URL: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/stadium"
+    POSTGRES_DB_URL: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/stadium"
     
     # Cache (Redis) Configuration
-    REDIS_URL: str = "rediss://default:gQAAAAAAAnQgAAIgcDIzODI4ZTBhNGRhMmU0YTBkODExNWZiNWFkZjE3YWZlYQ@rich-cub-160800.upstash.io:6379"
+    REDIS_URL: str = "redis://localhost:6379/0"
     
     # Background Worker (Celery) Configuration
-    CELERY_BROKER_URL: str = "rediss://default:gQAAAAAAAnQgAAIgcDIzODI4ZTBhNGRhMmU0YTBkODExNWZiNWFkZjE3YWZlYQ@rich-cub-160800.upstash.io:6379"
-    CELERY_RESULT_BACKEND: str = "rediss://default:gQAAAAAAAnQgAAIgcDIzODI4ZTBhNGRhMmU0YTBkODExNWZiNWFkZjE3YWZlYQ@rich-cub-160800.upstash.io:6379"
+    CELERY_BROKER_URL: str = "redis://localhost:6379/1"
+    CELERY_RESULT_BACKEND: str = "redis://localhost:6379/2"
     
     # Security Configuration
     JWT_SECRET: str = "change-me-in-production"
@@ -32,7 +32,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 10080  # 7 days
     
     # Middlewares Configurations
-    CORS_ORIGINS: Any = ["*"]
+    CORS_ORIGINS: Any = ["http://localhost:3000", "http://127.0.0.1:3000"]
     ALLOWED_HOSTS: Any = ["localhost", "127.0.0.1", "testserver"]
     
     # External APIs (Placeholders)

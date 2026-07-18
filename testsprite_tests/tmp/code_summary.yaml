@@ -1,0 +1,190 @@
+version: "2"
+type: frontend
+tech_stack:
+  - TypeScript
+  - Next.js 16
+  - React 19
+  - Tailwind CSS
+  - Firebase Auth
+  - FastAPI backend (REST + WebSocket)
+  - Recharts
+routes:
+  - path: /
+    file: app/page.tsx
+    auth_required: false
+    description: Home page with module navigation cards
+  - path: /auth
+    file: app/auth/page.tsx
+    auth_required: false
+    description: Login and registration with email/password and OAuth providers
+  - path: /fan-dashboard
+    file: app/fan-dashboard/page.tsx
+    auth_required: false
+    description: Personalized fan dashboard with live matches and tickets
+  - path: /fan-profile
+    file: app/fan-profile/page.tsx
+    auth_required: false
+    description: User profile, preferences, badges, and account settings
+  - path: /match-center
+    file: app/match-center/page.tsx
+    auth_required: false
+    description: Live match statistics and event tracking
+  - path: /team-analytics
+    file: app/team-analytics/page.tsx
+    auth_required: false
+    description: Team statistics, standings, and performance metrics
+  - path: /player-analytics
+    file: app/player-analytics/page.tsx
+    auth_required: false
+    description: Player statistics and comparisons
+  - path: /tournament-center
+    file: app/tournament-center/page.tsx
+    auth_required: false
+    description: Groups, standings, knockout bracket, and awards
+  - path: /tickets
+    file: app/tickets/page.tsx
+    auth_required: false
+    description: Ticket management and purchase
+  - path: /stadium-navigation
+    file: app/stadium-navigation/page.tsx
+    auth_required: false
+    description: Stadium maps and facility locations
+  - path: /food-beverage
+    file: app/food-beverage/page.tsx
+    auth_required: false
+    description: Food menus, queue times, and ordering
+  - path: /merchandise
+    file: app/merchandise/page.tsx
+    auth_required: false
+    description: Official merchandise shop
+  - path: /infrastructure
+    file: app/infrastructure/page.tsx
+    auth_required: false
+    description: Infrastructure management portal hub
+  - path: /infrastructure/energy
+    file: app/infrastructure/energy/page.tsx
+    auth_required: false
+    description: Energy monitoring and management
+  - path: /infrastructure/parking
+    file: app/infrastructure/parking/page.tsx
+    auth_required: false
+    description: Smart parking management
+  - path: /infrastructure/settings
+    file: app/infrastructure/settings/page.tsx
+    auth_required: false
+    description: Infrastructure settings panel
+  - path: /infrastructure/audit
+    file: app/infrastructure/audit/page.tsx
+    auth_required: false
+    description: Audit and compliance tracking
+  - path: /ai
+    file: app/ai/page.tsx
+    auth_required: false
+    description: AI intelligence platform hub
+  - path: /ai/command-center
+    file: app/ai/command-center/page.tsx
+    auth_required: false
+    description: AI command center dashboard
+  - path: /ai/executive-dashboard
+    file: app/ai/executive-dashboard/page.tsx
+    auth_required: false
+    description: Executive AI dashboard
+  - path: /operations
+    file: app/operations/page.tsx
+    auth_required: false
+    description: Stadium operations portal hub
+  - path: /operations/security
+    file: app/operations/security/page.tsx
+    auth_required: false
+    description: Security operations dashboard
+  - path: /operations/sanitation
+    file: app/operations/sanitation/page.tsx
+    auth_required: false
+    description: Sanitation operations dashboard
+features:
+  - name: Home Navigation
+    description: Browse all platform modules from the landing page
+    files:
+      - app/page.tsx
+      - components/FloatingNavBar.tsx
+    entry_route: /
+    user_interactions:
+      - View hero section and platform overview
+      - Click Get Started to open fan dashboard
+      - Click module cards to navigate to each section
+      - Access infrastructure, AI, and operations portals
+    api_calls: []
+    auth_required: false
+  - name: User Authentication
+    description: Login and registration with email/password and social OAuth
+    files:
+      - app/auth/page.tsx
+      - context/AuthProvider.tsx
+      - services/auth.service.ts
+      - lib/firebase.ts
+    entry_route: /auth
+    user_interactions:
+      - Fill email and password fields
+      - Toggle between login and register modes
+      - Click Login or Register button
+      - Use OAuth provider buttons (Google, Apple, Microsoft, etc.)
+      - See validation errors on invalid input
+    api_calls:
+      - method: POST
+        endpoint: /api/v1/auth/login
+      - method: POST
+        endpoint: /api/v1/auth/register
+    auth_required: false
+  - name: Fan Dashboard
+    description: Personalized dashboard with live match data and quick actions
+    files:
+      - app/fan-dashboard/page.tsx
+      - hooks/useDashboard.ts
+    entry_route: /fan-dashboard
+    user_interactions:
+      - View live match cards and statistics
+      - Navigate to tickets, food, and navigation modules
+      - See loading skeletons while data loads
+    api_calls:
+      - method: GET
+        endpoint: /api/v1/matches
+      - method: GET
+        endpoint: /api/v1/tickets
+    auth_required: false
+  - name: Infrastructure Management
+    description: Monitor and manage stadium infrastructure systems
+    files:
+      - app/infrastructure/page.tsx
+      - components/infrastructure/EnergyCard.tsx
+      - components/infrastructure/ParkingCard.tsx
+      - components/infrastructure/KPIWidget.tsx
+    entry_route: /infrastructure
+    user_interactions:
+      - View KPI widgets and system status cards
+      - Navigate to energy, parking, water, waste sub-modules
+      - Access settings and audit pages
+    api_calls:
+      - method: GET
+        endpoint: /api/v1/infrastructure
+    auth_required: false
+  - name: AI Command Center
+    description: AI-powered analytics and operational intelligence
+    files:
+      - app/ai/command-center/page.tsx
+      - app/ai/page.tsx
+    entry_route: /ai/command-center
+    user_interactions:
+      - View AI insights and recommendations
+      - Navigate between AI sub-modules
+      - Interact with command center dashboard widgets
+    api_calls:
+      - method: GET
+        endpoint: /api/v1/ai
+    auth_required: false
+known_limitations:
+  - issue: Static export mode disables Next.js server-side API routes
+    location: next.config.mjs
+    impact: Frontend relies on external backend API at NEXT_PUBLIC_API_URL
+  - issue: Firebase auth requires configured environment variables
+    location: lib/firebase.ts
+    impact: OAuth and Firebase login may fail without valid Firebase config

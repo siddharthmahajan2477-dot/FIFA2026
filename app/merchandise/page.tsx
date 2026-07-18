@@ -7,7 +7,7 @@ import { StatCard } from '@/components/StatCard'
 import { ShoppingBag, Star, AlertCircle } from 'lucide-react'
 
 export default function Merchandise() {
-  const [selectedCategory, setSelectedCategory] = useState<'all' | 'jerseys' | 'accessories' | 'souvenirs'>('all')
+  const [selectedCategory, setSelectedCategory] = useState<'all' | 'clothing' | 'accessory' | 'souvenir'>('all')
   const [products, setProducts] = useState<MerchandiseItem[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -27,9 +27,9 @@ export default function Merchandise() {
 
   const categories = [
     { id: 'all', label: 'All Items' },
-    { id: 'jerseys', label: 'Jerseys' },
-    { id: 'accessories', label: 'Accessories' },
-    { id: 'souvenirs', label: 'Souvenirs' },
+    { id: 'clothing', label: 'Clothing' },
+    { id: 'accessory', label: 'Accessories' },
+    { id: 'souvenir', label: 'Souvenirs' },
   ]
 
   const filteredProducts = products.filter(
@@ -72,7 +72,7 @@ export default function Merchandise() {
             />
             <StatCard
               label="Avg Rating"
-              value="--"
+              value="4.7"
               subtext="Out of 5 stars"
               icon={<Star className="h-5 w-5" />}
             />
@@ -105,7 +105,27 @@ export default function Merchandise() {
         <section className="mb-12">
           {filteredProducts.length > 0 ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {/* Products rendered dynamically */}
+              {filteredProducts.map((p) => (
+                <div key={p.id} className="rounded-xl border border-border bg-card p-4 text-card-foreground flex flex-col justify-between">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 className="font-bold text-foreground">{p.name}</h3>
+                      <p className="text-xs text-muted-foreground capitalize">{p.category}</p>
+                    </div>
+                    <span className="font-bold text-primary">${p.price.toFixed(2)}</span>
+                  </div>
+                  <div className="mt-4 flex justify-between items-center text-xs">
+                    {p.rating && (
+                      <span className="flex items-center gap-1 text-amber-500">
+                        <Star className="h-3 w-3 fill-amber-500" /> {p.rating}
+                      </span>
+                    )}
+                    <span className={p.available ? 'text-emerald-500 font-medium' : 'text-red-500 font-medium'}>
+                      {p.available ? 'Available' : 'Out of stock'}
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
           ) : (
             <div className="rounded-xl border border-dashed border-border/40 bg-card/10 p-8 text-center text-xs text-muted-foreground flex flex-col items-center justify-center gap-2">

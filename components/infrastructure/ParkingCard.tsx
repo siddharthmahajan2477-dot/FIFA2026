@@ -9,11 +9,11 @@ interface ParkingCardProps {
   available: number
   occupied: number
   capacity: number
-  status?: 'available' | 'limited' | 'full'
+  status?: 'available' | 'limited' | 'full' | 'closed'
 }
 
 export function ParkingCard({ type, available, occupied, capacity, status }: ParkingCardProps) {
-  const occupancyRate = (occupied / capacity) * 100
+  const occupancyRate = capacity > 0 ? (occupied / capacity) * 100 : 0
   const typeLabel = {
     standard: 'Standard Parking',
     vip: 'VIP Parking',
@@ -25,6 +25,7 @@ export function ParkingCard({ type, available, occupied, capacity, status }: Par
     available: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400',
     limited: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400',
     full: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400',
+    closed: 'bg-slate-100 text-slate-700 dark:bg-slate-900/30 dark:text-slate-400',
   }[status || 'available']
 
   return (
@@ -33,7 +34,7 @@ export function ParkingCard({ type, available, occupied, capacity, status }: Par
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg">{typeLabel}</CardTitle>
           <Badge className={statusColor}>
-            {status === 'full' ? 'Full' : status === 'limited' ? 'Limited' : 'Available'}
+            {status === 'full' ? 'Full' : status === 'limited' ? 'Limited' : status === 'closed' ? 'Closed' : 'Available'}
           </Badge>
         </div>
       </CardHeader>

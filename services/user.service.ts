@@ -1,7 +1,7 @@
 import { UserProfile, UserPreferences } from '../types/user'
 import { auth } from '@/lib/firebase'
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'
+const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_BACKEND_URL || 'https://fifa-smart-stadium-backend.onrender.com'
 
 export class UserService {
   static async getProfile(): Promise<UserProfile> {
@@ -44,9 +44,9 @@ export class UserService {
     
     // Map UserPreferences to backend payload
     const payload = {
-      email_updates: preferences.emailNotifications,
+      email_updates: preferences.emailNewsletter,
       push_notifications: preferences.pushNotifications,
-      sms_alerts: preferences.smsAlerts
+      sms_alerts: false
     }
     
     const res = await fetch(`${BACKEND_URL}/api/v1/users/me/preferences`, {

@@ -1,5 +1,5 @@
 export class WeatherService {
-  private static apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+  private static apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://fifa-smart-stadium-backend.onrender.com';
 
   static async getCurrentWeather(lat = 40.8135, lon = -74.0743) {
     try {

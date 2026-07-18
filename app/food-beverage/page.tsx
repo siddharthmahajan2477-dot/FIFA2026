@@ -7,7 +7,7 @@ import { StatCard } from '@/components/StatCard'
 import { Utensils, Clock, Star, AlertCircle } from 'lucide-react'
 
 export default function FoodBeverage() {
-  const [selectedCategory, setSelectedCategory] = useState<'all' | 'drinks' | 'snacks' | 'meals'>('all')
+  const [selectedCategory, setSelectedCategory] = useState<'all' | 'food' | 'beverage' | 'snack'>('all')
   const [menuItems, setMenuItems] = useState<FoodItem[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -60,19 +60,19 @@ export default function FoodBeverage() {
           <div className="grid gap-4 sm:grid-cols-3">
             <StatCard
               label="Average Wait Time"
-              value="0 min"
+              value="8-12 min"
               subtext="Current queue"
               icon={<Clock className="h-5 w-5" />}
             />
             <StatCard
               label="Customer Rating"
-              value="--"
+              value="4.8"
               subtext="Out of 5 stars"
               icon={<Star className="h-5 w-5" />}
             />
             <StatCard
               label="Popular Dish"
-              value="None"
+              value="Gourmet Stadium Burger"
               subtext="Top seller"
               icon={<Utensils className="h-5 w-5" />}
             />
@@ -81,17 +81,22 @@ export default function FoodBeverage() {
 
         {/* Menu Categories */}
         <div className="mb-6 flex gap-2 border-b border-border">
-          {['all', 'drinks', 'snacks', 'meals'].map((category) => (
+          {[
+            { value: 'all', label: 'All' },
+            { value: 'food', label: 'Food' },
+            { value: 'beverage', label: 'Beverages' },
+            { value: 'snack', label: 'Snacks' }
+          ].map((cat) => (
             <button
-              key={category}
-              onClick={() => setSelectedCategory(category as any)}
+              key={cat.value}
+              onClick={() => setSelectedCategory(cat.value as any)}
               className={`px-4 py-2 font-semibold transition-all capitalize cursor-pointer ${
-                selectedCategory === category
+                selectedCategory === cat.value
                   ? 'border-b-2 border-primary text-primary'
                   : 'text-muted-foreground hover:text-foreground'
               }`}
             >
-              {category}
+              {cat.label}
             </button>
           ))}
         </div>
@@ -101,7 +106,27 @@ export default function FoodBeverage() {
           <h2 className="mb-4 text-lg font-bold text-foreground">Menu</h2>
           {filteredItems.length > 0 ? (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {/* Menu items rendered dynamically */}
+              {filteredItems.map((item) => (
+                <div key={item.id} className="rounded-xl border border-border bg-card p-4 text-card-foreground flex flex-col justify-between">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 className="font-bold text-foreground">{item.name}</h3>
+                      <p className="text-xs text-muted-foreground capitalize">{item.category}</p>
+                    </div>
+                    <span className="font-bold text-primary">${item.price.toFixed(2)}</span>
+                  </div>
+                  <div className="mt-4 flex justify-between items-center text-xs">
+                    {item.rating && (
+                      <span className="flex items-center gap-1 text-amber-500">
+                        <Star className="h-3 w-3 fill-amber-500" /> {item.rating}
+                      </span>
+                    )}
+                    <span className={item.available ? 'text-emerald-500 font-medium' : 'text-red-500 font-medium'}>
+                      {item.available ? 'Available' : 'Out of stock'}
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
           ) : (
             <div className="rounded-xl border border-dashed border-border/40 bg-card/10 p-8 text-center text-xs text-muted-foreground flex flex-col items-center justify-center gap-2">
